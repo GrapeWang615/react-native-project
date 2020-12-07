@@ -17,8 +17,10 @@
 // 新增的事件响应方法
 - (IBAction)rnTestButtonPressed:(id)sender {
     NSLog(@"RNTest Button Pressed");
-    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.bundle?platform=ios"];
-    
+//    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.bundle?platform=ios"];
+    NSURL *jsCodeLocation;
+    jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"bundle/index"withExtension:@"jsbundle"];
+        
     RCTRootView *rootView =
     [[RCTRootView alloc] initWithBundleURL: jsCodeLocation
                                 moduleName: @"MyReactNativeApp"

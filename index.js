@@ -10,7 +10,7 @@ class HelloWorld extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.hello}>43434hhhhh33333333hhhhhhhhh</Text>
+        <Text style={styles.hello}>加载离线包资源</Text>
       </View>
     );
   }
