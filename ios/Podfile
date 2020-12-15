@@ -38,6 +38,8 @@ target 'ios' do
 
   # Pods for ios
 
+  pod 'CodePush', :path => '../node_modules/react-native-code-push'
+
   target 'iosTests' do
     inherit! :search_paths
     # Pods for testing
