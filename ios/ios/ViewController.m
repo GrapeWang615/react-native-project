@@ -7,6 +7,7 @@
 
 #import "ViewController.h"
 #import <React/RCTRootView.h> // 新增的依赖
+#import <CodePush/CodePush.h>
 
 @interface ViewController ()
 
@@ -19,8 +20,16 @@
     NSLog(@"RNTest Button Pressed");
 //    NSURL *jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.bundle?platform=ios"];
     NSURL *jsCodeLocation;
-    jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"bundle/index"withExtension:@"jsbundle"];
+//    jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main"withExtension:@"jsbundle"];
+    jsCodeLocation = [CodePush bundleURL];
+//    #if DEBUG
+//      jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"bundle/index"withExtension:@"jsbundle"];
+//    #else
+//      jsCodeLocation = [CodePush bundleURL];
+//    #endif
         
+    NSLog(@" ++ %@", jsCodeLocation);
+    
     RCTRootView *rootView =
     [[RCTRootView alloc] initWithBundleURL: jsCodeLocation
                                 moduleName: @"MyReactNativeApp"
