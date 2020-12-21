@@ -6,17 +6,31 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  Platform,
   View,
 } from 'react-native';
 
 import CodePush from "react-native-code-push";
 
-class App extends Component<{}> {
+//var Dimensions = require('Dimensions');
+
+const instructions = Platform.select({
+  ios: 'Press Cmd+R to reload,\n' +
+    'Cmd+D or shake for dev menu',
+  android: 'Double tap R on your keyboard to reload,\n' +
+    'Shake or press menu button for dev menu',
+});
+
+export default class App extends Component<{}> {
+
   constructor() {
     super();
-    this.state = { restartAllowed: true };
+    this.state = { restartAllowed: true ,
+                   syncMessage: "我是小更新" ,
+                   progress: false};
   }
 
+  // 监听更新状态
   codePushStatusDidChange(syncStatus) {
     switch(syncStatus) {
       case CodePush.SyncStatus.CHECKING_FOR_UPDATE:
@@ -50,6 +64,7 @@ class App extends Component<{}> {
     this.setState({ progress });
   }
 
+  // 允许重启后更新
   toggleAllowRestart() {
     this.state.restartAllowed
       ? CodePush.disallowRestart()
@@ -58,6 +73,7 @@ class App extends Component<{}> {
     this.setState({ restartAllowed: !this.state.restartAllowed });
   }
 
+  // 获取更新数据
   getUpdateMetadata() {
     CodePush.getUpdateMetadata(CodePush.UpdateState.RUNNING)
       .then((metadata: LocalPackage) => {
@@ -67,7 +83,7 @@ class App extends Component<{}> {
       });
   }
 
-  /** Update is downloaded silently, and applied on restart (recommended) */
+  /** Update is downloaded silently, and applied on restart (recommended) 自动更新，一键操作 */
   sync() {
     CodePush.sync(
       {},
@@ -76,7 +92,7 @@ class App extends Component<{}> {
     );
   }
 
-  /** Update pops a confirmation dialog, and then immediately reboots the app */
+  /** Update pops a confirmation dialog, and then immediately reboots the app 一键更新，加入的配置项 */
   syncImmediate() {
     CodePush.sync(
       { installMode: CodePush.InstallMode.IMMEDIATE, updateDialog: true },
@@ -86,7 +102,8 @@ class App extends Component<{}> {
   }
 
   render() {
-    let progressView;
+
+   let progressView;
 
     if (this.state.progress) {
       progressView = (
@@ -96,23 +113,31 @@ class App extends Component<{}> {
 
     return (
       <View style={styles.container}>
+
         <Text style={styles.welcome}>
-          6666666!
+         4466666666666
         </Text>
+
         <TouchableOpacity onPress={this.sync.bind(this)}>
           <Text style={styles.syncButton}>Press for background sync</Text>
         </TouchableOpacity>
+
         <TouchableOpacity onPress={this.syncImmediate.bind(this)}>
           <Text style={styles.syncButton}>Press for dialog-driven sync</Text>
         </TouchableOpacity>
+
         {progressView}
+        
         <TouchableOpacity onPress={this.toggleAllowRestart.bind(this)}>
           <Text style={styles.restartToggleButton}>Restart { this.state.restartAllowed ? "allowed" : "forbidden"}</Text>
         </TouchableOpacity>
+
         <TouchableOpacity onPress={this.getUpdateMetadata.bind(this)}>
           <Text style={styles.syncButton}>Press for Update Metadata</Text>
         </TouchableOpacity>
+
         <Text style={styles.messages}>{this.state.syncMessage || ""}</Text>
+
       </View>
     );
   }
@@ -148,14 +173,3 @@ const styles = StyleSheet.create({
     margin: 20
   },
 });
-
-/**
- * Configured with a MANUAL check frequency for easy testing. For production apps, it is recommended to configure a
- * different check frequency, such as ON_APP_START, for a 'hands-off' approach where CodePush.sync() does not
- * need to be explicitly called. All options of CodePush.sync() are also available in this decorator.
- */
-let codePushOptions = { checkFrequency: CodePush.CheckFrequency.MANUAL };
-
-App = CodePush(codePushOptions)(App);
-
-export default App;
