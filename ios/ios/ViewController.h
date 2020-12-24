@@ -15,7 +15,10 @@
 
 @interface ViewController : UIViewController
 
-- (IBAction) rnTestButtonPressed:(id)sender; // 响应“按钮被按下事件”的方法
+- (IBAction) rnTestButtonPressed:(id)sender; // 响应“按钮1被按下事件”的方法
+- (IBAction) rnTest2ButtonPressed:(id)sender; // 响应“按钮2被按下事件”的方法
+- (IBAction) rnTest3ButtonPressed:(id)sender; // 响应“按钮3被按下事件”的方法
+
 
 @end
 
