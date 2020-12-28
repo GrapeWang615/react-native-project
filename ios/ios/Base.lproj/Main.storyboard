@@ -44,7 +44,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="按钮2"/>
                                 <connections>
-                                    <action selector="rnTest2ButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hen-zh-hKo"/>
+                                    <action selector="rnTest2ButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Z5K-QI-ctn"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="这个是原生应用渲染的页面" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nj5-g7-bvT">
