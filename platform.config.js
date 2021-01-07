@@ -6,6 +6,7 @@ const useIndex = require('./multibundler/getModulelId').useIndex;
 let entry = "platformDep.js";//打包的入口，保证UI打包和命令行打包使用同一个入口名称
 
 function createModuleIdFactory() {
+    // __dirname---/Users/wz/Desktop/react-native-project  pathSep---/
     const projectRootPath = __dirname;//获取当前目录，__dirname是nodejs提供的变量
     return path => {
       let name = getModuleId(projectRootPath,path,entry,false);
